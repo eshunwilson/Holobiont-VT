@@ -6,10 +6,10 @@ This repository provides an open platform for collaboration and development in t
 
 ### Features and Objectives:
 
-Develop Python algorithms and models to simulate vertical transmission processes.
-Explore and analyze various scenarios related to vertical transmission within different contexts (e.g., epidemiology, genetics, technology networks).
-Provide comprehensive documentation and tutorials for users to understand, utilize, and contribute to the models effectively.
-Foster collaboration and contributions from the community to enhance the accuracy and versatility of the models.
+- Develop Python algorithms and models to simulate vertical transmission processes.
+- Explore and analyze various scenarios related to vertical transmission within different contexts (e.g., epidemiology, genetics, technology networks).
+- Provide comprehensive documentation and tutorials for users to understand, utilize, and contribute to the models effectively.
+- Foster collaboration and contributions from the community to enhance the accuracy and versatility of the models.
 
 ### Contributing:
 We welcome contributions from developers, researchers, and enthusiasts interested in modeling vertical transmission using Python. Whether you're interested in coding, testing, documentation, or providing feedback, your involvement is valuable. 
