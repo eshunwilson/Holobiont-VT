@@ -1,4 +1,5 @@
 Project Title: Vertical Transmission Modeling with Python
+___
 
 Description:
 Welcome to our repository dedicated to Python-based modeling for vertical transmission. Our goal is to develop robust Python code that simulates and models vertical transmission phenomena across various domains. 
