@@ -89,3 +89,28 @@ result = simulate_logistic_growth(max_individuals, growth_rate, num_generations)
 print(result)
 #[20, 23.92, 28.58956672, 34.14400739895253, 40.73964623049109, 48.55563172159219, 57.79522819153405, 68.68621614949856, 81.47990012161115, 96.44808532116784, 113.87725575297756, 134.05910102800726, 157.27655271992123, 183.78468045681305, 213.7862547940531, 247.40259320509017, 284.6415032211875, 325.36564679422156, 369.26621533030146, 415.8479508394888, 464.4316373639062]
 
+#trial 3 
+#how can an ID be created for each of the holobionts with a value of 2-5 bacteria (example)
+#
+import random
+
+def logistic_growth_with_individuals(K, R, F):
+    # Initialize a list of dictionaries to track individuals
+    individuals = [{'id': i, 'value': random.uniform(2, 5)} for i in range(1, 21)]  # 20 individuals with random values between 2 and 5
+
+    for step in range(1, F + 1):
+        # Calculate growth for each individual
+        for person in individuals:
+            new_value = person['value'] + R * person['value'] * (1 - person['value'] / K)
+            person['value'] = min(K, new_value)  # Cap value at K
+
+    return individuals
+
+# Example usage:
+max_individuals = 1000  # K: Maximum number of individuals
+growth_rate = 0.2  # R: Growth rate
+num_generations = 10  # F: Number of steps of generations
+
+result = logistic_growth_with_individuals(max_individuals, growth_rate, num_generations)
+print(result)
+#with 10 generations the values are small for each individual
