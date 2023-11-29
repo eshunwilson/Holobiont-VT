@@ -66,14 +66,16 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
-#converting the for look into a function:
+#converting the for loop into a function:
+#first code
 def logistic_growth(K, R, F):
     population = [20]  # Initial population starts at 20 individuals
     for step in range(1, F + 1):
         new_population = population[-1] + R * population[-1] * (1 - population[-1] / K)
         population.append(min(K, new_population))  # Cap population at K
     return population
-
+    
+#new function for population growth
 def simulate_logistic_growth(max_individuals, growth_rate, num_generations):
     result = logistic_growth(max_individuals, growth_rate, num_generations)
     return result
@@ -85,3 +87,5 @@ num_generations = 20  # F: Number of steps of generations
 
 result = simulate_logistic_growth(max_individuals, growth_rate, num_generations)
 print(result)
+#[20, 23.92, 28.58956672, 34.14400739895253, 40.73964623049109, 48.55563172159219, 57.79522819153405, 68.68621614949856, 81.47990012161115, 96.44808532116784, 113.87725575297756, 134.05910102800726, 157.27655271992123, 183.78468045681305, 213.7862547940531, 247.40259320509017, 284.6415032211875, 325.36564679422156, 369.26621533030146, 415.8479508394888, 464.4316373639062]
+
