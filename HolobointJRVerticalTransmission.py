@@ -23,13 +23,6 @@ def new_growth(K, R, F, P):
 
 ####################################################
 #Step 1 creating the Matrix and trial plots
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Dec  6 10:40:54 2023
-
-@author: mtn309
-"""
 #trial to create matrix using given indexes from JRs paper
 import numpy as np
 
@@ -149,4 +142,5 @@ for t in range(1, Tm + 1):
         H[t][i] = np.ceil(H[t - 1][i] * (1 + growth_rate * (1 - H[t - 1][i] / max_individuals)))
 
 print(H)
+##results show a fraction even with np.floor used to round values to whole numbers
 #################################################
