@@ -23,11 +23,9 @@ We encourage you to fork this repository, make your contributions, and submit pu
 We value a diverse and inclusive community. Feel free to reach out through issues, discussions, or email if you have any questions, suggestions, or need support. 
 Let's collaborate to advance our understanding of vertical transmission through Python modeling.
 
-### License:
-This project is licensed under [License Name] - see the LICENSE file for details.
 
 ### Acknowledgments:
-We express our gratitude to [Acknowledged individuals or organizations] for their support, insights, and contributions to this project.
+We express our gratitude members of GLOBE at Copenhagen University and Dr. Joan Roughgarden from Stanford on their support and insight on this project.
 
 Join us in exploring the dynamics of vertical transmission through modeling and simulations.
 
