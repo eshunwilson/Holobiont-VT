@@ -1,0 +1,77 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+T = 20  # Number of time steps (generations)
+K = 1000  # Carrying capacity (max number of microbes)
+pool_mixing_rate = 0.1  # Fraction of microbes transferred
+growth_rate = 0.05  # Proliferation rate (per time step)
+fitness = np.linspace(0.5, 2, K + 1)  # Fitness function, increasing with microbe count
+
+# Initialize the population matrix H(t, n) with zeros
+H = np.zeros((T + 1, K + 1))
+
+# Set initial values for t = 0 with random numbers (initial bacterial population distribution)
+initial_holobionts = np.random.randint(0, 1000, size=K + 1)  # Random initial population distribution
+H[0, :] = initial_holobionts
+
+# Pool Mixing Function (Horizontal Transfer)
+def pool_mixing(H, t, pool_mixing_rate, K):
+    total_microbes = np.sum(np.arange(K + 1) * H[t, :])  # Total microbes in all holobionts
+    total_holobionts = np.sum(H[t, :])  # Total number of holobionts
+    
+    # Fraction of microbes that are transferred into the pool
+    transferred_microbes = pool_mixing_rate * total_microbes
+    
+    # Redistribute transferred microbes evenly across holobionts
+    microbes_per_holobiont = transferred_microbes / total_holobionts if total_holobionts > 0 else 0
+    
+    # Update the number of microbes in holobionts due to mixing
+    for n in range(K + 1):
+        H[t + 1, n] = H[t, n] + microbes_per_holobiont * H[t, n] / (total_holobionts + 1e-6)
+    return H
+
+# Proliferation Function (Microbial Growth)
+def microbial_proliferation(H, t, growth_rate, K):
+    # Apply microbial growth to each holobiont
+    for n in range(K + 1):
+        # Increase microbes based on growth rate and carrying capacity
+        if H[t + 1, n] > 0:  # Only apply growth to holobionts with microbes
+            H[t + 1, n] += H[t + 1, n] * growth_rate * (1 - n / K)
+    return H
+
+# Selection Function (Fitness-Based Reproduction)
+def holobiont_selection(H, t, fitness):
+    # Apply fitness to each holobiont based on microbe count
+    for n in range(H.shape[1]):
+        H[t + 1, n] *= fitness[n]  # Multiply by fitness
+    return H
+
+# Simulation loop with histogram plotting for 20 time steps
+for t in range(T):
+    # Apply pool mixing step
+    H = pool_mixing(H, t, pool_mixing_rate, K)
+    
+    # Apply microbial proliferation step
+    H = microbial_proliferation(H, t, growth_rate, K)
+    
+    # Apply selection step
+    H = holobiont_selection(H, t, fitness)
+
+    # Normalize holobiont counts to fractions (fraction of total holobionts)
+    total_holobionts = np.sum(H[t + 1, :])
+    H_fraction = H[t + 1] / total_holobionts if total_holobionts > 0 else H[t + 1]
+
+    # Get the max fraction for dynamic y-axis scaling
+    max_fraction = np.max(H_fraction)
+
+    # Plotting the histogram for the current time point
+    plt.figure(figsize=(8, 6))
+    plt.hist(range(K + 1), bins=np.arange(K + 2) - 0.5, weights=H_fraction, edgecolor='black')
+    plt.title(f'Bacterial Population at Time t={t + 1}')
+    plt.xlabel('Number of Microbes per Holobiont')
+    plt.ylabel('Fraction of Holobionts')
+    plt.xticks([])  # Remove x-axis label
+    plt.ylim(0, max_fraction * 1.1)  # Set y-axis to 10% above the max fraction for clarity
+    plt.grid(axis='y', alpha=0.5)
+    plt.show()
